@@ -6,8 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="script.js"></script>
     <style>
+      body {
+        background-color: rgb(204, 246, 250);
+        font-family: sans-serif;
+        font-size: 1.2rem;
+        color: black;
+        box-sizing: border-box;
+      }
+      form {
+        background-color: rgb(125, 236, 240);
+        width: 47.5%;
+        height: fit-content;
+        margin: auto auto;
+        padding: 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 19px 0px rgba(27, 26, 26, 0.7);
+      }
+      input,
+      select {
+        height: 1.35rem;
+        font-size: 1rem;
+        padding-left: 1rem;
+      }
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+      }
+      #heading {
+        margin-top: -1.5rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid rgb(143, 142, 142);
+      }
+
+      #submit {
+        background-color: gold;
+        height: 2.35rem;
+        width: 9rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 0.25rem;
+      }
+      #submit:hover {
+        background-color: dodgerblue;
+        cursor: pointer;
+      }
       small {
-        color: rgb(238, 77, 48);
+        color: tomato;
+        font-weight: 700;
       }
     </style>
     <title>Document</title>
@@ -19,15 +65,17 @@
       onsubmit="return validateForm()"
       method="get"
     >
+      <div id="heading"><h1>Registration form</h1></div>
+
       <div>
         <label for="fname">First Name:</label>
-        <input type="text" name="fname" id="fname" />
+        <input type="text" name="fname" id="fname" maxlength="15" />
         <small id="fnameErr">*</small>
       </div>
       <br />
       <div>
         <label for="lname">Lastname:</label>
-        <input type="text" name="lname" id="lname" />
+        <input type="text" name="lname" id="lname" maxlength="15" />
         <small id="lnameErr">*</small>
       </div>
       <br />
@@ -38,20 +86,26 @@
       </div>
       <br />
       <div>
-        <label for="password">Password</label>
+        <label for="password">Password : </label>
         <input type="password" name="password" id="password" />
         <small id="pwErr">*</small>
       </div>
       <br />
       <div>
-        <label for="password2">Confirm Password</label>
+        <label for="password2">Confirm Password : </label>
         <input type="password" name="password2" id="password2" />
         <small id="pw2Err">*</small>
       </div>
       <br />
       <div>
         <label for="birthday">Date of birth : </label>
-        <input type="date" id="birthday" name="birthday" />
+        <input
+          type="date"
+          id="birthday"
+          name="birthday"
+          min="2020-01-01"
+          max="2022-12-31"
+        />
       </div>
       <br />
       <div>
@@ -97,12 +151,14 @@
       <div>
         <label for="validate">What is 5 + 4 ? :</label>
         <input type="number" name="validate" id="validate" min="0" max="100" />
+        <small id="validErr">*</small>
       </div>
       <br />
 
       <div>
-        <input type="submit" value="Submit" />
+        <input type="submit" id="submit" value="Submit" />
       </div>
+      <br />
     </form>
     <script>
       function validateForm() {
@@ -159,7 +215,7 @@
         } else if (password2 == null || password2 == "") {
           alert("enter confirm password");
           document.getElementById("password2").style.borderColor = "red";
-          document.getElementById("pwErr").innerHTML =
+          document.getElementById("pw2Err").innerHTML =
             "*enter a valid password";
           return false;
           //checks two entered passwords
@@ -173,6 +229,7 @@
         } else if (validate != 9) {
           alert("You're either a spammer or can't add");
           document.getElementById("validate").style.borderColor = "red";
+          document.getElementById("validErr").innerHTML = "*Fill the answer";
 
           return false;
         }
