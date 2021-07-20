@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js"></script>
+    <style>
+      /* input {
+        display: block;
+      } */
+      small {
+        color: tomato;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      name="contactForm"
+      action=""
+      onsubmit="return validateForm()"
+      method="get"
+    >
+      <div>
+        <label for="fname">First Name:</label>
+        <input type="text" name="fname" id="fname" />
+        <small id="fnameErr">*</small>
+      </div>
+      <br />
+      <div>
+        <label for="lname">Lastname:</label>
+        <input type="text" name="lname" id="lname" />
+        <small id="lnameErr">*</small>
+      </div>
+      <br />
+      <div>
+        <label for="email">Email : </label>
+        <input type="email" name="email" id="email" />
+        <small id="emailErr">*</small>
+      </div>
+      <br />
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+        <small id="pwErr">*</small>
+      </div>
+      <br />
+      <div>
+        <label for="password2">Confirm Password</label>
+        <input type="password" name="password2" id="password2" />
+        <small id="pw2Err">*</small>
+      </div>
+      <br />
+      <div>
+        <label for="birthday">Date of birth : </label>
+        <input type="date" id="birthday" name="birthday" />
+      </div>
+      <br />
+      <div>
+        <span>Select your gender : </span>
+        <input type="radio" name="gender" id="male" value="male" />
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female" value="female" />
+        <label for="female">Female</label>
+        <input type="radio" name="gender" id="other" value="other" />
+        <label for="other">Other</label>
+      </div>
+      <br />
+      <div>
+        <label for="state">Select your state</label>
+        <select name="state" id="state">
+          <option value="tamilnadu">TamilNadu</option>
+          <option value="kerala">Kerala</option>
+          <option value="karnataka">Karnataka</option>
+          <option value="andhrapradesh">AndhraPradesh</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <span>Vaccinated : </span>
+        <input
+          type="radio"
+          name="vaccinated"
+          id="vaccinated"
+          value="yes"
+          required
+        />
+        <label for="vaccinated">Yes</label>
+        <input
+          type="radio"
+          name="vaccinated"
+          id="notvaccinated"
+          value="no"
+          required
+        />
+        <label for="notvaccinated">No</label>
+      </div>
+      <br />
+      <div>
+        <label for="validate">What is 5 + 4 ? :</label>
+        <input type="number" name="validate" id="validate" min="0" max="100" />
+      </div>
+      <br />
+
+      <div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+    <script>
+      function validateForm() {
+        var fname = document.getElementById("fname").value;
+        var lname = document.getElementById("lname").value;
+        var email = document.getElementById("email").value;
+        var validate = document.forms["contactForm"]["validate"].value;
+        var password = document.getElementById("password").value;
+        var password2 = document.getElementById("password2").value;
+
+        //checks the Firstname is filled
+        if (fname == null || fname == "") {
+          alert("Firstname must be filled out");
+          document.getElementById("fname").style.borderColor = "red";
+          document.getElementById("fnameErr").innerHTML =
+            "*Firstname must be filled out";
+          return false;
+          //checks the lastname is filled
+        } else if (lname == null || lname == "") {
+          alert("Lastname must be filled out");
+          document.getElementById("lname").style.borderColor = "red";
+          document.getElementById("lnameErr").innerHTML =
+            "*Lastname must be filled out";
+          return false;
+          // checks email is entered or not
+        } else if (email == null || email == "") {
+          alert("email not filled");
+          document.getElementById("email").style.borderColor = "red";
+          document.getElementById("emailErr").innerHTML =
+            "*Email must be filled out";
+          return false;
+          //checks the presence of @ and .com
+        } else if (email.indexOf("@") < 0 || email.indexOf(".com") < 0) {
+          alert("email not valid");
+          document.getElementById("email").style.borderColor = "red";
+          document.getElementById("emailErr").innerHTML =
+            "*Enter a valid email id";
+          return false;
+          //ensures password is filled
+        } else if (password == null || password == "") {
+          alert("Password not filled");
+          document.getElementById("password").style.borderColor = "red";
+          document.getElementById("pwErr").innerHTML =
+            "*enter a valid password";
+          return false;
+          //checks the password minimum length
+        } else if (password.length < 8) {
+          alert("enter atleast 8 charcter password ");
+          document.getElementById("password").style.borderColor = "red";
+          document.getElementById("pwErr").innerHTML =
+            "*atleast 8 charectrs required";
+          return false;
+          // ensured confirmpassword filled
+        } else if (password2 == null || password2 == "") {
+          alert("enter confirm password");
+          document.getElementById("password2").style.borderColor = "red";
+          document.getElementById("pwErr").innerHTML =
+            "*enter a valid password";
+          return false;
+          //checks two entered passwords
+        } else if (password !== password2) {
+          alert("Password not matching");
+          document.getElementById("password").style.borderColor = "red";
+          document.getElementById("password2").style.borderColor = "red";
+          document.getElementById("pwErr").innerHTML = "*password not matched";
+          document.getElementById("pw2Err").innerHTML = "*password not matched";
+          return false;
+        } else if (validate != 9) {
+          alert("You're either a spammer or can't add");
+          document.getElementById("validate").style.borderColor = "red";
+
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
